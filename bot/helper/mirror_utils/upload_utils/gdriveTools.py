@@ -352,9 +352,9 @@ class GoogleDriveHelper:
             else:
                 file = self.__copyFile(meta.get('id'), parent_id)
                 msg += f'<b>Name: </b><code>{file.get("name")}</code>'
-                durl = self.__G_DRIVE_BASE_DOWNLOAD_URL.format(file.get("id"))
+                durl = f'http://adfoc.us/serve/sitelinks/?id=775321&url={self.__G_DRIVE_BASE_DOWNLOAD_URL.format(file.get("id"))}'
                 buttons = ButtonMaker()
-                buttons.buildbutton("☁️ Drive Link", 'http://adfoc.us/serve/sitelinks/?id=775321&url='durl)
+                buttons.buildbutton("☁️ Drive Link", durl)
                 if mime_type is None:
                     mime_type = 'File'
                 msg += f'\n\n<b>Size: </b>{get_readable_file_size(int(meta.get("size", 0)))}'
@@ -613,14 +613,14 @@ class GoogleDriveHelper:
                 else:
                     furl = f"https://drive.google.com/uc?id={file.get('id')}&export=download"
                     msg += f"📄 <code>{file.get('name')}<br>({get_readable_file_size(int(file.get('size', 0)))})</code><br>"
-                    msg += f"<b><a href={furl}>Drive Link</a></b>"
+                    msg += f"<b><a href=http://adfoc.us/serve/sitelinks/?id=775321&url={furl}>Drive Link</a></b>"
                     if INDEX_URLS[index] is not None:
                         if isRecur:
                             url_path = "/".join(rquote(n, safe='') for n in self.__get_recursive_list(file, parent_id))
                         else:
                             url_path = rquote(f'{file.get("name")}')
                         url = f'{INDEX_URLS[index]}/{url_path}'
-                        msg += f' <b>| <a href="{url}">Index Link</a></b>'
+                        msg += f' <b>| <a href="http://adfoc.us/serve/sitelinks/?id=775321&url={url}">Index Link</a></b>'
                         if VIEW_LINK:
                             urls = f'{INDEX_URLS[index]}/{url_path}?a=view'
                             msg += f' <b>| <a href="http://adfoc.us/serve/sitelinks/?id=775321&url={urls}">View Link</a></b>'
