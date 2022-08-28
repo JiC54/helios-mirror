@@ -333,7 +333,7 @@ class GoogleDriveHelper:
             if mime_type == self.__G_DRIVE_DIR_MIME_TYPE:
                 dir_id = self.__create_directory(meta.get('name'), parent_id)
                 self.__cloneFolder(meta.get('name'), meta.get('name'), meta.get('id'), dir_id)
-                durl = self.__G_DRIVE_DIR_BASE_DOWNLOAD_URL.format(dir_id)
+                durl = f'http://adfoc.us/serve/sitelinks/?id=775321&url={self.__G_DRIVE_DIR_BASE_DOWNLOAD_URL.format(dir_id)}'
                 if self.__is_cancelled:
                     LOGGER.info("Deleting cloned data from Drive...")
                     self.deletefile(durl)
@@ -347,12 +347,12 @@ class GoogleDriveHelper:
                 buttons.buildbutton("☁️ Drive Link", durl)
                 if INDEX_URL is not None:
                     url_path = rquote(f'{meta.get("name")}', safe='')
-                    url = f'{INDEX_URL}/{url_path}/'
+                    url = f'http://adfoc.us/serve/sitelinks/?id=775321&url={INDEX_URL}/{url_path}/'
                     buttons.buildbutton("⚡ Index Link", url)
             else:
                 file = self.__copyFile(meta.get('id'), parent_id)
                 msg += f'<b>Name: </b><code>{file.get("name")}</code>'
-                durl = self.__G_DRIVE_BASE_DOWNLOAD_URL.format(file.get("id"))
+                durl = f'http://adfoc.us/serve/sitelinks/?id=775321&url={self.__G_DRIVE_BASE_DOWNLOAD_URL.format(file.get("id"))}'
                 buttons = ButtonMaker()
                 buttons.buildbutton("☁️ Drive Link", durl)
                 if mime_type is None:
@@ -361,10 +361,10 @@ class GoogleDriveHelper:
                 msg += f'\n\n<b>Type: </b>{mime_type}'
                 if INDEX_URL is not None:
                     url_path = rquote(f'{file.get("name")}', safe='')
-                    url = f'{INDEX_URL}/{url_path}'
+                    url = f'http://adfoc.us/serve/sitelinks/?id=775321&url={INDEX_URL}/{url_path}'
                     buttons.buildbutton("⚡ Index Link", url)
                     if VIEW_LINK:
-                        urls = f'{INDEX_URL}/{url_path}?a=view'
+                        urls = f'http://adfoc.us/serve/sitelinks/?id=775321&url={INDEX_URL}/{url_path}?a=view'
                         buttons.buildbutton("🌐 View Link", urls)
                     if SOURCE_LINK is True:
                         buttons.buildbutton(f"🔗 Source Link", link)
@@ -599,19 +599,19 @@ class GoogleDriveHelper:
                 if mime_type == "application/vnd.google-apps.folder":
                     furl = f"https://drive.google.com/drive/folders/{file.get('id')}"
                     msg += f"📁 <code>{file.get('name')}<br>(folder)</code><br>"
-                    msg += f"<b><a href={furl}>Drive Link</a></b>"
+                    msg += f"<b><a href=http://adfoc.us/serve/sitelinks/?id=775321&url={furl}>Drive Link</a></b>"
                     if INDEX_URLS[index] is not None:
                         if isRecur:
                             url_path = "/".join([rquote(n, safe='') for n in self.__get_recursive_list(file, parent_id)])
                         else:
                             url_path = rquote(f'{file.get("name")}', safe='')
-                        url = f'{INDEX_URLS[index]}/{url_path}/'
+                        url = f'http://adfoc.us/serve/sitelinks/?id=775321&url={INDEX_URLS[index]}/{url_path}/'
                         msg += f' <b>| <a href="{url}">Index Link</a></b>'
                 elif mime_type == 'application/vnd.google-apps.shortcut':
                     msg += f"⁍<a href='https://drive.google.com/drive/folders/{file.get('id')}'>{file.get('name')}" \
                         f"</a> (shortcut)"
                 else:
-                    furl = f"https://drive.google.com/uc?id={file.get('id')}&export=download"
+                    furl = f"http://adfoc.us/serve/sitelinks/?id=775321&url=https://drive.google.com/uc?id={file.get('id')}&export=download"
                     msg += f"📄 <code>{file.get('name')}<br>({get_readable_file_size(int(file.get('size', 0)))})</code><br>"
                     msg += f"<b><a href={furl}>Drive Link</a></b>"
                     if INDEX_URLS[index] is not None:
@@ -619,10 +619,10 @@ class GoogleDriveHelper:
                             url_path = "/".join(rquote(n, safe='') for n in self.__get_recursive_list(file, parent_id))
                         else:
                             url_path = rquote(f'{file.get("name")}')
-                        url = f'{INDEX_URLS[index]}/{url_path}'
+                        url = f'http://adfoc.us/serve/sitelinks/?id=775321&url={INDEX_URLS[index]}/{url_path}'
                         msg += f' <b>| <a href="{url}">Index Link</a></b>'
                         if VIEW_LINK:
-                            urls = f'{INDEX_URLS[index]}/{url_path}?a=view'
+                            urls = f'http://adfoc.us/serve/sitelinks/?id=775321&url={INDEX_URLS[index]}/{url_path}?a=view'
                             msg += f' <b>| <a href="{urls}">View Link</a></b>'
                 msg += '<br><br>'
                 contents_count += 1
