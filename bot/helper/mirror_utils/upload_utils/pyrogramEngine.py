@@ -86,8 +86,8 @@ class TgUploader:
             leechchat = LEECH_DUMP
         else: leechchat = self.__listener.message.chat.id
         if CUSTOM_FILENAME is not None:
-            cap_mono = f"{CUSTOM_FILENAME} <b>{file_}</b>"
-            file_ = f"{CUSTOM_FILENAME} {file_}"
+            cap_mono = f"<b>{file_}</b>"
+            file_ = f"{CUSTOM_FILENAME}{file_}"
             new_path = ospath.join(dirpath, file_)
             osrename(up_path, new_path)
             up_path = new_path
@@ -224,4 +224,4 @@ class TgUploader:
     def cancel_download(self):
         self.__is_cancelled = True
         LOGGER.info(f"Cancelling Upload: {self.name}")
-        self.__listener.onUploadError('your upload has been stopped!')
+        self.__listener.onUploadError('upload has been stopped!')
